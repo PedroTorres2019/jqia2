@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>접을 수 있는 리스트 &mdash; 4</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <script type="text/javascript"
+            src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('li:has(ul)')
+          .click(function(event){
+            if (this == event.target) {
+              if ($(this).children().is(':hidden')) {
+                $(this)
+                  .css('list-style-image','url(minus.gif)')
+                  .children().slideDown();
+              }
+              else {
+                $(this)
+                  .css('list-style-image','url(plus.gif)')
+                  .children().slideUp();
+              }
+            }
+            return false;
+          })
+          .css({cursor:'pointer',
+                'list-style-image':'url(plus.gif)'})
+          .children().hide();
+        $('li:not(:has(ul))').css({
+          cursor: 'default',
+          'list-style-image':'none'
+        });
+      });
+    </script>
+    <style>
+      fieldset { width: 320px }
+    </style>
+  </head>
+
+  <body>
+    <fieldset>
+      <legend>접을 수 있는 리스트 &mdash; 4</legend>
+      <ul>
+        <li>아이템1</li>
+        <li>아이템2</li>
+        <li>
+          아이템3
+          <ul>
+            <li>아이템3.1</li>
+            <li>
+              아이템3.2
+              <ul>
+                <li>아이템3.2.1</li>
+                <li>아이템3.2.2</li>
+                <li>아이템3.2.3</li>
+              </ul>
+            </li>
+            <li>아이템3.3</li>
+          </ul>
+        </li>
+        <li>
+          아이템4
+          <ul>
+            <li>아이템4.1</li>
+            <li>
+              아이템4.2
+              <ul>
+                <li>아이템4.2.1</li>
+                <li>아이템4.2.2</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>아이템5</li>
+      </ul>
+    </fieldset>
+  </body>
+</html>

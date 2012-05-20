@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>셀렉터 연습</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <script type="text/javascript" src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript" src="../scripts/support.labs.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('#resultsDisplay').hide();
+        $('#labForm').submit(function(){
+          try {
+            var selector = $('#selectorField').val();
+            if (selector.length > 0) {
+              var wrappedSet = domSampleFrame.applySelector(selector);
+              $('#jQueryStatement').html('$("' + selector + '").addClass("wrappedElement")');
+              $('#wrappedSetSizeDisplay').html(wrappedSet.size());
+              $('#elementInfoDisplay').html(wrappedSet.formatForDisplay());
+              $('#resultsDisplay').show();
+            }
+          }
+          catch(e) {
+            alert('error:'+e);
+          }
+          return false;
+        });
+        $.get('sample.dom.html',function(data){
+          $('#htmlForSample').html(data.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br/>').replace(/ /g,'&nbsp;'));
+        });
+        $('#selectorField').focus();
+      });
+    </script>
+    <style>
+      #selectorFieldset,#domSampleFieldset {
+        width: 388px;
+        float: left;
+      }
+      #domSampleFieldset {
+        margin-left: 12px;
+      }
+      #domSampleFrame {
+        width: 368px;
+        height: 432px;
+      }
+      #resultsDisplay {
+        padding: 2px;
+        background-color: beige;
+      }
+      #elementInfoDisplay {
+        width: 368px;
+        color: maroon;
+      }
+      #elementInfoDisplay div {
+        margin-left: 8px;
+      }
+      #htmlDisplayFieldset {
+        clear: both;
+        width: 809px;
+      }
+      #selectorField {
+        width: 95%;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <h1>셀렉터 연습 </h1>
+
+    <fieldset id="selectorFieldset">
+      <legend>셀렉터 </legend>
+      <form id="labForm">
+        <div>
+          텍스트 필드에 셀렉터를 입력하고 적용 버튼을 클릭하세요.
+        </div>
+        <div>
+          <label>셀렉터:</label><br/>
+          <textarea rows="3" id="selectorField"></textarea>
+          <br/>
+          <button type="submit" id="applyButton">적용</button>
+        </div>
+      </form>
+      <div id="resultsDisplay">
+        <div>
+          <label>jQuery 구문:</label> <span id="jQueryStatement"></span>
+        </div>
+        <div>
+          <label>일치하는 엘리먼트: <span id="wrappedSetSizeDisplay">0</span> 개</label>
+          <div id="elementInfoDisplay"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset id="domSampleFieldset">
+      <legend>DOM 샘플</legend>
+      <iframe name="domSampleFrame" id="domSampleFrame" src="subpage.selectors.html"></iframe>
+    </fieldset>
+
+    <fieldset id="htmlDisplayFieldset">
+      <legend>DOM 샘플용 HTML</legend>
+      <pre id="htmlForSample"></pre>
+    </fieldset>
+
+  </body>
+</html>

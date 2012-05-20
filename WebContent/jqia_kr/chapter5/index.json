@@ -1,0 +1,8 @@
+[
+  {url:'collapsible.list.take.1.html',caption:'접을 수 있는 리스트 #1'},
+  {url:'collapsible.list.take.2.html',caption:'접을 수 있는 리스트 #2'},
+  {url:'collapsible.list.take.3.html',caption:'접을 수 있는 리스트 #3'},
+  {url:'collapsible.list.take.4.html',caption:'접을 수 있는 리스트 #4'},
+  {url:'lab.effects.html',caption:'jQuery 효과 연습 페이지'},
+  {url:'custom.effects.html',caption:'사용자 정의 효과 데모'}
+]

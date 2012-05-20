@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>DOM 레벨 0 이벤트 예제</title>
+    <script type="text/javascript" src="../scripts/jquery-1.2.1.js">
+    </script>
+    <script type="text/javascript">
+      $(function(){
+        $('#vstar')[0].onmouseover = function(event) {
+          say('우아!');
+        }
+      });
+
+      function say(text) {
+        $('#console').append('<div>'+new Date()+' '+text+'</div>');
+      }
+    </script>
+  </head>
+
+  <body>
+    <img id="vstar" src="vstar.jpg" onclick="say('부릉 부릉!')"/>
+    <div id="console"></div>
+  </body>
+</html>

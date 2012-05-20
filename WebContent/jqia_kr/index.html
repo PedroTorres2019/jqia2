@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>jQuery 인 액션 코드 예제 실행 페이지</title>
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <script type="text/javascript" src="scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('li').click(function(event){
+          if (event.target.tagName!='LI') return true;
+          var oldBlocks = $('.chapterBlock').slideUp('normal',function(){oldBlocks.remove()});
+          var target = this;
+          var folder = this.id;
+          $.getJSON(folder+'/index.json',function(info) {
+            var block = $('<div></div>');
+            for (var n=0;n<info.length;n++) {
+              block.append('<div><a href="'+folder+'/'+info[n].url+'" target="_blank">'+info[n].caption+'</a></div>');
+            }
+            block
+              .css('display','none')
+              .addClass('chapterBlock')
+              .appendTo(target)
+              .slideDown();
+          })
+        });
+      });
+    </script>
+    <style>
+      body {
+        background-image: url(backg.jpg);
+        background-repeat: repeat-x;
+      }
+      fieldset {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+      div#container {
+        position: relative;
+        background-image: url(backg.jpg);
+        background-repeat: repeat-x;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 520px;
+        border: 2px solid #3db8d3;
+        border-right-color: #2f8ea3;
+        border-bottom-color: #2f8ea3;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <img id="banner" src="banner.jpg" alt="jQuery in Action Code Examples Launch Page"/>
+
+      <fieldset id="exampleIndex">
+        <legend>코드 예제</legend>
+        <div>
+          <ul>
+            <li id="chapter1">1장</li>
+            <li id="chapter2">2장</li>
+            <li id="chapter3">3장</li>
+            <li id="chapter4">4장</li>
+            <li id="chapter5">5장</li>
+            <li id="chapter6">6장</li>
+            <li id="chapter7">7장</li>
+            <li id="chapter8">8장</li>
+            <li id="chapter9">9장</li>
+            <li id="appendixA">부록A</li>
+          </ul>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>서버 설정 확인</legend>
+        <div>
+          <p>
+            <a href="chapter8/test.jsp">JSP 설치 확인</a>
+          </p>
+          <p>
+            <a href="chapter8/test.php">PHP 설치 확인</a>
+          </p>
+        </div>
+      </fieldset>
+    </div>
+
+  </body>
+</html>

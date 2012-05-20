@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>준비 핸들러 시험</title>
+    <script type="text/javascript" src="../scripts/jquery-1.2.1.js">
+    </script>
+    <script type="text/javascript">
+      window.onload = function() {
+        alert('onload 핸들러');
+      }
+      $(function(){
+        alert('준비 핸들러 1');
+      });
+      $(function(){
+        alert('준비 핸들러 2');
+      });
+      $(function(){
+        alert('준비 핸들러 3');
+      });
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>

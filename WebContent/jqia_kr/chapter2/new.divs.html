@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>새로운 &lt;div&gt; 예제</title>
+    <script type="text/javascript" src="../scripts/jquery-1.2.1.js">
+    </script>
+    <script type="text/javascript">
+      $(function(){
+        $("<div class='foo'>내가 foo를 가졌다!</div><div>나는 foo를 가지지 않았다.</div>")
+          .filter(".foo").click(function() {
+            alert("내가 foo이다!");
+          }).end().appendTo("#someParentDiv");
+      });
+    </script>
+  </head>
+
+  <body>
+    <div>Div 1</div>
+    <div id="someParentDiv">Div 2</div>
+    <div>Div 3</div>
+  </body>
+</html>

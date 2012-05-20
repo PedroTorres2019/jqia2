@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>예제 8.6</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <script type="text/javascript"
+            src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('#goodButton').click(function(){
+          $.get('reflectData.jsp');
+        });
+        $('#badButton').click(function(){
+          $.get('returnError.jsp');
+        });
+        $('#successDisplay').ajaxSuccess(function(info){
+          $(info.target)
+            .append('<div>성공: '+new Date()+'</div>');
+        });
+        $('#errorDisplay').ajaxError(function(info,xhr){
+          $(info.target)
+            .append('<div>실패: '+new Date()+'</div>')
+            .append('<div>상태: ' + xhr.status + ' ' +
+                    xhr.statusText+'</div>');
+        });
+      });
+    </script>
+    <style>
+      fieldset {
+        width: 480px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <fieldset>
+      <legend>초기 Ajax 요청</legend>
+      <div>
+        <button type="button" id="goodButton">
+         성공 요청 보내기
+        </button>
+        <button type="button" id="badButton">
+          실패 요청 보내기
+        </button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>성공 표시</legend>
+      <div id="successDisplay"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>에러 표시</legend>
+      <div id="errorDisplay"></div>
+    </fieldset>
+  </body>
+</html>

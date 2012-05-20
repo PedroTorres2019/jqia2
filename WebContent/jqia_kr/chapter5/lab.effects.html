@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>jQuery 효과 연습 페이지</title>
+    <link rel="stylesheet" type="text/css" href="../common.css">
+    <script type="text/javascript" src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript" src="../scripts/support.labs.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('#controlPanelForm').bind('submit',function(){
+          var effect = $('#effectsContainer :radio:checked').val();
+          var speed = $('#speedContainer :radio:checked').val();
+          if (speed=='custom') {
+            speed = new Number($('#speedValueControl').val());
+            if (isNaN(speed)||(speed<=0)) speed='normal';
+          }
+          var opacity = new Number($('#opacityValueControl').val())/100.0;
+          if ((effect=='show'||effect=='hide'||effect=='toggle')&&speed=='none') {
+            showCommand(effect);
+            $('#testSubjects').children()[effect]();
+          }
+          else if (effect=='fadeTo') {
+            if (speed=='none') speed = 'normal';
+            showCommand(effect,speed,opacity);
+            $('#testSubjects').children()[effect](speed,opacity);
+          }
+          else {
+            if (speed=='none') speed = 'normal';
+            showCommand(effect,speed);
+            $('#testSubjects').children()[effect](speed);
+          }
+          return false;
+        });
+        $('#speedContainer').click(function(event){$('#speedValueControl').attr('disabled',!$('#customSpeedControl').is(':checked'))});
+        $('#testSubject3,#testSubject4').hide();
+        $('#testSubject4').css('opacity','0.5');
+      });
+
+      function showCommand(effect,speed,opacity) {
+        var text = '$(testSubjects).'+ effect + '(';
+        if (speed) text += ((typeof speed=='string')?"'":"")+speed+((typeof speed=='string')?"'":"");
+        if (opacity) text += ','+opacity;
+        text += ');'
+        $('#appliedCommand').html(text);
+      }
+    </script>
+    <style>
+      fieldset {
+        width: 640px;
+      }
+      form>div {
+        clear: both;
+      }
+      label {
+        font-weight: bold;
+        float: left;
+        text-align: right;
+        width: 128px;
+        margin-right: 6px;
+      }
+      #speedValueControl,#opacityValueControl {
+        width: 48px;
+      }
+      #testSubject1,#testSubject3 {
+        width: 88px;
+        height: 88px;
+        padding: 8px;
+        border: 1px maroon solid;
+      }
+      #testSubjects div, #testSubjects img {
+        float: left;
+        margin-right: 16px;
+      }
+      #appliedCommand {
+        color: maroon;
+      }
+    </style>
+  </head>
+
+  <body>
+    <fieldset>
+      <legend>연습 제어 패널</legend>
+      <form id="controlPanelForm" action="" autocomplete="false">
+        <div>
+          <label>효과:</label>
+          <div style="float:left" id="effectsContainer">
+            <div>
+              <input type="radio" name="effect" value="show" checked="checked"/> 보이기
+              <input type="radio" name="effect" value="hide"/> 감추기
+              <input type="radio" name="effect" value="toggle"/> 토글
+            </div>
+            <div>
+              <input type="radio" name="effect" value="fadeIn"/> 페이드인
+              <input type="radio" name="effect" value="fadeOut"/> 페이드아웃
+              <input type="radio" name="effect" value="fadeTo"/> 페이드투
+            </div>
+            <div>
+              <input type="radio" name="effect" value="slideDown"/> 슬라이드다운
+              <input type="radio" name="effect" value="slideUp"/> 슬라이드업
+              <input type="radio" name="effect" value="slideToggle"/> 슬라이드 토글
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div id="speedContainer">
+            <label>속도:</label>
+            <input type="radio" name="speed" value="none" checked="checked"/> 없음
+            <input type="radio" name="speed" value="slow"/> 느림
+            <input type="radio" name="speed" value="normal"/> 보통
+            <input type="radio" name="speed" value="fast"/> 빠름
+            <input type="radio" name="speed" value="custom" id="customSpeedControl"/> 밀리초:
+            <input type="text" name="speedValue" id="speedValueControl" disabled="disabled"/>
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <label>페이드투 투명도:</label>
+            <input type="text" name="opacityValue" id="opacityValueControl"/> %
+          </div>
+        </div>
+
+        <div>
+          <button id="applyButton" type="submit">적용</button>
+        </div>
+
+      </form>
+      <div id="appliedCommandContainer">
+        <label>수행된 커맨드:</label> <span id="appliedCommand"></span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>시험 대상</legend>
+      <div id="testSubjects">
+        <div id="testSubject1">초기에 보여지는 시험 대상 &lt;div&gt; 엘리먼트이다.</div>
+        <div id="testSubject2"><img src="IMG_2298.jpg" alt="test subject img"/></div>
+        <div id="testSubject3">초기에 감춰진 시험 대상 &lt;div&gt; 엘리먼트이다.</div>
+        <div id="testSubject4"><img src="IMG_2319.jpg" alt="test subject img"/></div>
+      </div>
+      <div style="clear:both"></div>
+    </fieldset>
+  </body>
+</html>
